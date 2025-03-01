@@ -27,5 +27,5 @@ export function useScrollToBottom<T extends HTMLElement>(): [
     }
   }, []);
 
-  return [containerRef, endRef];
+  return [containerRef as React.RefObject<T>, endRef as React.RefObject<T>];
 }

@@ -40,7 +40,7 @@ export function DocumentPreview({
   >(result ? `/api/document?id=${result.id}` : null, fetcher);
 
   const previewDocument = useMemo(() => documents?.[0], [documents]);
-  const hitboxRef = useRef<HTMLDivElement>(null);
+  const hitboxRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const boundingBox = hitboxRef.current?.getBoundingClientRect();
@@ -146,7 +146,7 @@ const PureHitboxLayer = ({
   result,
   setArtifact,
 }: {
-  hitboxRef: React.RefObject<HTMLDivElement>;
+  hitboxRef: React.RefObject<HTMLDivElement | null>;
   result: any;
   setArtifact: (
     updaterFn: UIArtifact | ((currentArtifact: UIArtifact) => UIArtifact),
@@ -180,7 +180,7 @@ const PureHitboxLayer = ({
   return (
     <div
       className="size-full absolute top-0 left-0 rounded-xl z-10"
-      ref={hitboxRef}
+      ref={hitboxRef as React.RefObject<HTMLDivElement>}
       onClick={handleClick}
       role="presentation"
       aria-hidden="true"
